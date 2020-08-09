@@ -228,9 +228,16 @@ $(function() {
     
     
     function appendHistory(command, result, error) {
-        history.push({command, result, error});
-        while(history.length > MAX_HISTORY_SIZE)
-            history.shift();
+        if(result !== undefined || error !== undefined) {
+            history.push({command, result, error});
+            while(history.length > MAX_HISTORY_SIZE)
+                history.shift();
+        }
+        saveState();
+    }
+    
+    function clearHistory() {
+        history.length = 0;
         saveState();
     }
     
@@ -272,9 +279,12 @@ $(function() {
         let newCommand = ''; //the command we will actually pass to eval()
         
         //do everything case-insensitive
-        command = command.toLowerCase();
+        command = command.toLowerCase().trim();
         
-        //TODO: special handling for command "cls", "clear", or "reset" - clear history
+        if(command === 'clear' || command === 'reset' || command === 'cls') {
+            clearHistory();
+            return {};
+        }
         
         try {
             if(command.indexOf('=') > 0) {
