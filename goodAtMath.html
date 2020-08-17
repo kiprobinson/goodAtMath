@@ -11,6 +11,7 @@ file in a browser from your local machine and run it directly.
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <title>Good@Math</title>
 <link rel="shortcut icon" type="image/png" href="data:@file/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAGUExURf/MiAAAAEWriQ0AAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAqSURBVBjTY8AGBNAZgoICjIKCWKWw6RZgYAQxGBkRQhDtcBG4GlTAwAAAUJIBDzloZOUAAAAASUVORK5CYII="/>
+<link href="https://fonts.googleapis.com/css2?family=Antic+Slab&family=Permanent+Marker&display=swap" rel="stylesheet">
 <style type="text/css">
 /* Copied from: http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css */
 html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;*font-size:100%}legend{color:#000}#yui3-css-stamp.cssreset{display:none}
@@ -21,7 +22,7 @@ html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre
 }
 html {
   background-color: #fc8;
-  font-family: Arial;
+  font-family: 'Antic Slab',serif;
   font-size: 1.3rem
 }
 body {
@@ -33,12 +34,17 @@ body {
     padding: 20px;
     padding-bottom: 3px;
     grid-template-columns: 18rem auto;
-    grid-template-rows: auto 2.5rem 1rem;
+    grid-template-rows: 0.5rem auto 2.5rem 1rem;
     width: 100vw;
     height: 100vh;
 }
+#head {
+    grid-row: 1;
+    grid-column: 1 / span 2;
+    margin-top: -1rem;
+}
 #vars {
-    grid-row: 1 / span 2;
+    grid-row: 2 / span 2;
     grid-column: 1;
     padding: 0.2rem;
     background-color: #eee;
@@ -46,7 +52,7 @@ body {
     overflow-y: auto;
 }
 #history {
-    grid-row: 1;
+    grid-row: 2;
     grid-column: 2;
     background-color: #eee;
     border-radius: 0.5rem;
@@ -54,8 +60,13 @@ body {
     overflow-y: auto;
 }
 #command {
-    grid-row: 2;
+    grid-row: 3;
     grid-column: 2;
+}
+#copyright {
+    grid-column: 1 / span 2;
+    text-align: center;
+    font-size: 0.6rem;
 }
 
 #vars .var {
@@ -103,14 +114,16 @@ body {
 #command-input:focus {
     outline: none;
 }
-#copyright {
-    grid-column: 1 / span 2;
-    text-align: center;
-    font-size: 0.6rem;
+h1, h2 {
+    font-family: 'Permanent Marker', cursive;
 }
 h1 {
+    font-size: 1.75em;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+h2 {
     font-size: 1.25em;
-    font-weight: bold;
     text-decoration: underline;
     text-align: center;
     margin-bottom: 0.5rem;
@@ -359,8 +372,11 @@ $(function() {
 </head>
 <body>
 <div id="grid">
+    <div id="head">
+        <h1>Good@Math</h1>
+    </div>
     <div id="vars">
-        <h1>Variables</h1>
+        <h2>Variables</h2>
         <div id="vars-list"></div>
     </div>
     <div id="history"></div>
