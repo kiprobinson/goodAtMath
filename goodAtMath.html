@@ -58,6 +58,7 @@ body {
     border-radius: 0.5rem;
     padding: 0.5rem;
     overflow-y: auto;
+    position: relative;
 }
 #command {
     grid-row: 3;
@@ -123,6 +124,15 @@ body {
     bottom: 0.5rem;
     cursor: pointer;
 }
+#clear-history {
+    position: sticky;
+    float: right;
+    top: 0.5rem;
+    right: 0.5rem;
+    height: 1.25rem;
+    cursor: pointer;
+}
+
 
 h1, h2 {
     font-family: 'Permanent Marker', cursive;
@@ -211,6 +221,11 @@ $(function() {
         onRun();
     });
     
+    $('#clear-history').on('click', function() {
+        clearHistory();
+        drawHistory();
+    });
+    
     function onRun() {
         const $command = $('#command-input');
         const command = $command.val().trim();
@@ -223,7 +238,6 @@ $(function() {
         
         $command.val('').focus();
     }
-    //TODO: Button to clear history
     // --------- LISTENERS - END ---------
     
     function safeJsonParse(json) {
@@ -286,7 +300,7 @@ $(function() {
     };
     
     function drawHistory() {
-        const $history = $('#history');
+        const $history = $('#history-records');
         $history.empty();
         history.forEach(({command, result, error}) => {
             const $record = $('<div class="history-record">').data('command', command);
@@ -296,7 +310,8 @@ $(function() {
             $history.append($record);
         });
         
-        $history[0].scrollTop = $history[0].scrollHeight
+        const $container = $('#history')[0];
+        $container.scrollTop = $container.scrollHeight
     };
     
     function runCommand(command) {
@@ -394,7 +409,10 @@ $(function() {
         <h2>Variables</h2>
         <div id="vars-list"></div>
     </div>
-    <div id="history"></div>
+    <div id="history">
+        <button id="clear-history">&times;</button>
+        <div id="history-records"></div>
+    </div>
     <div id="command">
         <input type="text" id="command-input"></input>
         <button id="run-command">&#x1f846;</button>
