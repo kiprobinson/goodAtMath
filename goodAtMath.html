@@ -95,11 +95,11 @@ body {
     margin-bottom: 0.5rem;
 }
 #history .history-record .history-copy {
-    width: 1rem;
+    width: 1.5rem;
     cursor: pointer;
 }
 #history .history-record .history-command {
-    width: calc(100% - 1rem);
+    width: calc(100% - 1.5rem);
 }
 #history .history-result {
     width: 100%;
@@ -304,7 +304,7 @@ $(function() {
         $history.empty();
         history.forEach(({command, result, error}) => {
             const $record = $('<div class="history-record">').data('command', command);
-            $record.append($('<div class="history-copy">').html('&#x1f847;'));
+            $record.append($('<div class="history-copy">').html('&#x21e9;'));
             $record.append($('<div class="history-command">').text(command));
             $record.append($('<div class="history-result">').text(error || drawNumber(result)));
             $history.append($record);
@@ -415,7 +415,7 @@ $(function() {
     </div>
     <div id="command">
         <input type="text" id="command-input"></input>
-        <button id="run-command">&#x1f846;</button>
+        <button id="run-command">&#x21e8;</button>
     </div>
     <div id="copyright">Good@Math created by Kip Robinson. Details at <a href="https://github.com/kiprobinson/goodAtMath">GitHub</a>.</div>
 </div>
